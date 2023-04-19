@@ -13,6 +13,7 @@
 		DC03613129E6E119008CA6A0 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DC03613029E6E119008CA6A0 /* Preview Assets.xcassets */; };
 		DC03613829E6E177008CA6A0 /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03613729E6E177008CA6A0 /* ShoppingList.swift */; };
 		DC03613A29E6E929008CA6A0 /* NumberGuess.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC03613929E6E929008CA6A0 /* NumberGuess.swift */; };
+		DC5839C129F01F2C00EB2329 /* MarketList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC5839C029F01F2C00EB2329 /* MarketList.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,6 +24,7 @@
 		DC03613029E6E119008CA6A0 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		DC03613729E6E177008CA6A0 /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
 		DC03613929E6E929008CA6A0 /* NumberGuess.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NumberGuess.swift; sourceTree = "<group>"; };
+		DC5839C029F01F2C00EB2329 /* MarketList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MarketList.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -57,6 +59,7 @@
 			children = (
 				DC03612929E6E118008CA6A0 /* assignmentApp.swift */,
 				DC03612B29E6E118008CA6A0 /* ContentView.swift */,
+				DC5839C029F01F2C00EB2329 /* MarketList.swift */,
 				DC03613729E6E177008CA6A0 /* ShoppingList.swift */,
 				DC03613929E6E929008CA6A0 /* NumberGuess.swift */,
 				DC03612D29E6E119008CA6A0 /* Assets.xcassets */,
@@ -147,6 +150,7 @@
 				DC03612C29E6E118008CA6A0 /* ContentView.swift in Sources */,
 				DC03613829E6E177008CA6A0 /* ShoppingList.swift in Sources */,
 				DC03612A29E6E118008CA6A0 /* assignmentApp.swift in Sources */,
+				DC5839C129F01F2C00EB2329 /* MarketList.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
