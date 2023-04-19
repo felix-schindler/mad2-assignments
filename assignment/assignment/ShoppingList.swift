@@ -26,17 +26,16 @@ struct ShoppingList: View {
 				Section("List items") {
 					ForEach(list, id: \.self) { item in
 						Text(item)
-					}.swipeActions {
-						Button(role: .destructive, action: {
-							let i = list.firstIndex(of: item)
-							if (i != nil) {
-								list.remove(at: i!)
-								persist()
+							.swipeActions {
+								Button(role: .destructive, action: {
+									let i = list.firstIndex(of: item)
+									list.remove(at: i!)
+									persist()
+								}, label: {
+									Label("Delete", systemImage: "trash")
+										.labelStyle(.iconOnly)
+								})
 							}
-						}, label: {
-							Label("Delete", systemImage: "trash")
-								.labelStyle(.iconOnly)
-						})
 					}
 				}
 			}
