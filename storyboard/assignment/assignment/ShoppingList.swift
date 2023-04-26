@@ -16,7 +16,20 @@ class ShoppingList {
 	
 	/// Append item to  `list` and persist
 	public func add(shop: String, item: String) {
-		lists[shop] = item
+		if (lists[shop] == nil) {
+			print("[ERROR] There is no shop with name '\(shop)'")
+			return
+		}
+
+		lists[shop]!.append(item)
+		print("[DEBUG] Added '\(item)' to list '\(shop)'")
+		self.persist()
+	}
+
+	/// Create a new shopping list
+	public func addShop(_ name: String) {
+		lists[name] = []
+		print("[DEBUG] List '\(name)' created - \(lists)")
 		self.persist()
 	}
 	
@@ -27,7 +40,7 @@ class ShoppingList {
 			lists = _lists
 			print("[DEBUG] Loaded - \(lists)")
 		} else {
-			print("Failed to load")
+			print("[ERROR] Failed to load")
 		}
 	}
 
