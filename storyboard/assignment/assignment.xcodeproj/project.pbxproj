@@ -16,6 +16,7 @@
 		DC9EA44A29F9562A00E9A96F /* ShoppingListTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EA44929F9562A00E9A96F /* ShoppingListTableViewController.swift */; };
 		DC9EA44C29F957CC00E9A96F /* ShoppingList.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC9EA44B29F957CC00E9A96F /* ShoppingList.swift */; };
 		DCD7F5E029F976D7004C08D4 /* ShopListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCD7F5DF29F976D7004C08D4 /* ShopListViewController.swift */; };
+		DCF7943C29FA94F7009A96D4 /* CocktailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCF7943B29FA94F7009A96D4 /* CocktailViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +31,7 @@
 		DC9EA44929F9562A00E9A96F /* ShoppingListTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingListTableViewController.swift; sourceTree = "<group>"; };
 		DC9EA44B29F957CC00E9A96F /* ShoppingList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShoppingList.swift; sourceTree = "<group>"; };
 		DCD7F5DF29F976D7004C08D4 /* ShopListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShopListViewController.swift; sourceTree = "<group>"; };
+		DCF7943B29FA94F7009A96D4 /* CocktailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CocktailViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -65,9 +67,10 @@
 				DC9EA44B29F957CC00E9A96F /* ShoppingList.swift */,
 				DC9EA43129F94F7500E9A96F /* AppDelegate.swift */,
 				DC9EA43329F94F7500E9A96F /* SceneDelegate.swift */,
-				DC9EA43529F94F7500E9A96F /* ViewController.swift */,
+				DCF7943B29FA94F7009A96D4 /* CocktailViewController.swift */,
 				DCD7F5DF29F976D7004C08D4 /* ShopListViewController.swift */,
 				DC9EA44929F9562A00E9A96F /* ShoppingListTableViewController.swift */,
+				DC9EA43529F94F7500E9A96F /* ViewController.swift */,
 				DC9EA43729F94F7500E9A96F /* Main.storyboard */,
 				DC9EA43A29F94F7600E9A96F /* Assets.xcassets */,
 				DC9EA43C29F94F7600E9A96F /* LaunchScreen.storyboard */,
@@ -152,6 +155,7 @@
 				DCD7F5E029F976D7004C08D4 /* ShopListViewController.swift in Sources */,
 				DC9EA44C29F957CC00E9A96F /* ShoppingList.swift in Sources */,
 				DC9EA43429F94F7500E9A96F /* SceneDelegate.swift in Sources */,
+				DCF7943C29FA94F7009A96D4 /* CocktailViewController.swift in Sources */,
 				DC9EA44A29F9562A00E9A96F /* ShoppingListTableViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

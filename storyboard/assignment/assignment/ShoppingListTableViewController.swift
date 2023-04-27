@@ -7,10 +7,17 @@
 
 import UIKit
 
-class ShoppingListTableViewController: UITableViewController {
+class ShoppingListTableViewController: UITableViewController, UISearchBarDelegate {
 	
+	// Needs to be set when navigating here
 	var shop: String = ""
+	
+	// All items
+	var allItems: [String] = []
+	// Items that match the current search
 	var items: [String] = []
+	
+	@IBOutlet weak var search: UISearchBar!
 	
 	init(style: UITableView.Style, shop: String) {
 		self.shop = shop
@@ -34,14 +41,34 @@ class ShoppingListTableViewController: UITableViewController {
 		// Set the data source of the table view to be this view controller
 		tableView.dataSource = self
 		tableView.reloadData()
+		
+		search.delegate = self
+	}
+	
+	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+		print("[DEBUG] Searching for '\(searchText)'")
+		
+		if (searchText.isEmpty) {
+			// Search is empty -> reset to all items
+			items = allItems
+		} else {
+			// Filter for items containing the searchText
+			items = allItems.filter({ (names: String) -> Bool in
+				return names.contains(searchText.lowercased())
+			})
+		}
+
+		// Reload view data
+		tableView.reloadData()
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
 		// Load everything from persistens
 		ShoppingList.shared.load()
-
+		
 		// Get items of the shopping list
-		items = ShoppingList.shared.lists[shop] ?? []
+		allItems = ShoppingList.shared.lists[shop] ?? []
+		items = allItems
 		print("[DEBUG] Loaded items of list '\(shop)' - \(items)")
 		
 		// Reload table
