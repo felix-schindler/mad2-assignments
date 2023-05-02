@@ -55,7 +55,7 @@
                                     </connections>
                                 </searchBar>
                                 <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="Gi9-B9-qqF">
-                                    <rect key="frame" x="0.0" y="599.66666793823242" width="393" height="44"/>
+                                    <rect key="frame" x="0.0" y="600" width="393" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <prototypes>
