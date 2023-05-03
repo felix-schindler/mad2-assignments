@@ -37,7 +37,7 @@ class CocktailViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
-	var foundDrinks: [String: [String]] = [:]
+	var foundDrinks: Dictionary<String, [String]> = [:]
 	var foundDrinkNames: [String] = []
 	var filteredDrinkNames: [String] = []
 	let apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f="
