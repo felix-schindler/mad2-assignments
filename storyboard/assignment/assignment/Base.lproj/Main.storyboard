@@ -29,7 +29,7 @@
         <!--Cocktail search-->
         <scene sceneID="1tu-hC-xcA">
             <objects>
-                <viewController id="Qd4-f8-bd6" customClass="CocktailViewController" customModule="assignment" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Qd4-f8-bd6" customClass="CocktailViewController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="zeS-5v-v3a">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -55,7 +55,7 @@
                                     </connections>
                                 </searchBar>
                                 <activityIndicatorView key="tableFooterView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="medium" id="Gi9-B9-qqF">
-                                    <rect key="frame" x="0.0" y="600" width="393" height="44"/>
+                                    <rect key="frame" x="0.0" y="599.66666793823242" width="393" height="44"/>
                                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 </activityIndicatorView>
                                 <prototypes>
@@ -66,8 +66,15 @@
                                             <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <segue destination="5lB-Hr-L5J" kind="show" identifier="segueToCocktail" id="bAc-sB-7hU"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="zeS-5v-v3a" id="tTD-2D-MVV"/>
+                                    <outlet property="delegate" destination="zeS-5v-v3a" id="gqt-ML-5ff"/>
+                                </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mC2-W9-VGn">
                                 <rect key="frame" x="112" y="166" width="168" height="35"/>
@@ -102,12 +109,50 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="2ls-UU-edf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-794.6564885496183" y="-339.43661971830988"/>
+            <point key="canvasLocation" x="-802" y="-339"/>
+        </scene>
+        <!--Cocktail-->
+        <scene sceneID="abv-aW-dM5">
+            <objects>
+                <tableViewController id="5lB-Hr-L5J" customClass="CocktailDetails" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="9zr-h6-WzT">
+                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <button key="tableHeaderView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" id="Pzp-g2-Hd5">
+                            <rect key="frame" x="0.0" y="0.0" width="393" height="35"/>
+                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                            <state key="normal" title="Button"/>
+                            <buttonConfiguration key="configuration" style="tinted" title="Add ingredients to shopping list"/>
+                            <connections>
+                                <action selector="addIngredients:" destination="5lB-Hr-L5J" eventType="touchUpInside" id="4LS-C0-Zlq"/>
+                            </connections>
+                        </button>
+                        <prototypes>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="reuseIdentifier" id="Leu-ak-m5x">
+                                <rect key="frame" x="0.0" y="85" width="393" height="43.666667938232422"/>
+                                <autoresizingMask key="autoresizingMask"/>
+                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Leu-ak-m5x" id="5XC-d7-6Ic">
+                                    <rect key="frame" x="0.0" y="0.0" width="393" height="43.666667938232422"/>
+                                    <autoresizingMask key="autoresizingMask"/>
+                                </tableViewCellContentView>
+                            </tableViewCell>
+                        </prototypes>
+                        <connections>
+                            <outlet property="dataSource" destination="5lB-Hr-L5J" id="CBz-4w-mLy"/>
+                            <outlet property="delegate" destination="5lB-Hr-L5J" id="D9U-tz-Nvf"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Cocktail" id="GrK-tl-bLn"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PGS-Fe-hxf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-802" y="344"/>
         </scene>
         <!--Add Item-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="assignment" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -156,7 +201,7 @@
         <!--Shopping list-->
         <scene sceneID="8Gb-cN-Arx">
             <objects>
-                <tableViewController id="Fd0-qH-Xa5" customClass="ShopListViewController" customModule="assignment" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="Fd0-qH-Xa5" customClass="ShopListViewController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="uTX-K5-YBE">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -196,7 +241,7 @@
         <!--Items-->
         <scene sceneID="mZZ-nY-oi6">
             <objects>
-                <tableViewController id="EiD-jr-28J" customClass="ShoppingListTableViewController" customModule="assignment" customModuleProvider="target" sceneMemberID="viewController">
+                <tableViewController id="EiD-jr-28J" customClass="ShoppingListTableViewController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="-1" estimatedSectionHeaderHeight="-1" sectionFooterHeight="-1" estimatedSectionFooterHeight="-1" id="6Kk-Ey-aBK">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -244,7 +289,7 @@
         <!--Add List-->
         <scene sceneID="jTG-Ke-h7Q">
             <objects>
-                <viewController id="dOG-N3-99c" customClass="ViewController" customModule="assignment" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="dOG-N3-99c" customClass="ViewController" customModule="Shopping_List" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="6ly-B0-meo">
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

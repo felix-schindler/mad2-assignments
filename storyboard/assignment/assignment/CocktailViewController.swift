@@ -30,6 +30,11 @@ struct Drink: Decodable {
 	let strIngredient15: String?
 }
 
+struct MyDrink {
+	let name: String
+	let ingredients: [String]
+}
+
 
 class CocktailViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
 	
@@ -37,9 +42,9 @@ class CocktailViewController: UIViewController, UITableViewDelegate, UITableView
 	@IBOutlet weak var tableView: UITableView!
 	@IBOutlet weak var activityIndicator: UIActivityIndicatorView!
 	
-	var foundDrinks: Dictionary<String, [String]> = [:]
-	var foundDrinkNames: [String] = []
+	var allDrinks: Dictionary<String, MyDrink> = [:]
 	var filteredDrinkNames: [String] = []
+	
 	let apiUrl = "https://www.thecocktaildb.com/api/json/v1/1/search.php?f="
 	let shoppingListKey = "shoppingList"
 	
@@ -49,96 +54,59 @@ class CocktailViewController: UIViewController, UITableViewDelegate, UITableView
 		// Set up table view
 		tableView.dataSource = self
 		tableView.delegate = self
-		tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
+		// tableView.register(UITableViewCell.self, forCellReuseIdentifier: "reuseIdentifier")
 		
 		// Set up search bar
 		searchBar.delegate = self
 	}
 	
 	override func viewDidAppear(_ animated: Bool) {
+		searchBar(self.searchBar, textDidChange: "A")
 	}
 	
 	// MARK: - Search
 	func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
 		guard let firstLetter = searchText.first else { return }
-		print("[DEBUG] Searching drinks starting with the letter '\(firstLetter)'")
-
+		
 		let urlString = apiUrl + String(firstLetter)
 		guard let url = URL(string: urlString) else { return }
 		// Show the activity indicator
 		activityIndicator.startAnimating()
 		// Fetch the data from the API
 		URLSession.shared.dataTask(with: url) { data, response, error in
+			print("[DEBUG] Searching for drinks starting with the letter '\(firstLetter)'")
+
 			guard let data = data else {
 				print("Error fetching data: \(error?.localizedDescription ?? "Unknown error")")
 				return
 			}
+			
 			do {
 				let decoder = JSONDecoder()
 				let result = try decoder.decode(DrinkList.self, from: data)
 				// Parse the data and store it in foundDrinks
-				self.foundDrinks.removeAll()
+				
 				for drink in result.drinks {
-					let name = drink.strDrink
-					var ingredientArray: [String] = []
-					if (drink.strIngredient1 != nil) {
-						ingredientArray.append(drink.strIngredient1!)
-					}
-					if (drink.strIngredient2 != nil) {
-						ingredientArray.append(drink.strIngredient2!)
-					}
-					if (drink.strIngredient3 != nil) {
-						ingredientArray.append(drink.strIngredient3!)
-					}
-					if (drink.strIngredient4 != nil) {
-						ingredientArray.append(drink.strIngredient4!)
-					}
-					if (drink.strIngredient5 != nil) {
-						ingredientArray.append(drink.strIngredient5!)
-					}
-					if (drink.strIngredient6 != nil) {
-						ingredientArray.append(drink.strIngredient6!)
-					}
-					if (drink.strIngredient7 != nil) {
-						ingredientArray.append(drink.strIngredient7!)
-					}
-					if (drink.strIngredient8 != nil) {
-						ingredientArray.append(drink.strIngredient8!)
-					}
-					if (drink.strIngredient9 != nil) {
-						ingredientArray.append(drink.strIngredient9!)
-					}
-					if (drink.strIngredient10 != nil) {
-						ingredientArray.append(drink.strIngredient10!)
-					}
-					if (drink.strIngredient11 != nil) {
-						ingredientArray.append(drink.strIngredient11!)
-					}
-					if (drink.strIngredient12 != nil) {
-						ingredientArray.append(drink.strIngredient12!)
-					}
-					if (drink.strIngredient13 != nil) {
-						ingredientArray.append(drink.strIngredient13!)
-					}
-					if (drink.strIngredient14 != nil) {
-						ingredientArray.append(drink.strIngredient14!)
-					}
-					if (drink.strIngredient15 != nil) {
-						ingredientArray.append(drink.strIngredient15!)
-					}
-
-					self.foundDrinks[name] = ingredientArray
+					// Set ingredient array for drinks
+					self.allDrinks[drink.strDrink] = MyDrink(name: drink.strDrink, ingredients: [
+						drink.strIngredient1, drink.strIngredient2, drink.strIngredient3, drink.strIngredient4, drink.strIngredient5, drink.strIngredient6, drink.strIngredient7, drink.strIngredient8, drink.strIngredient9, drink.strIngredient10, drink.strIngredient11, drink.strIngredient12, drink.strIngredient13, drink.strIngredient14, drink.strIngredient15
+					].compactMap({ $0 }))
 				}
-				self.foundDrinkNames = Array(self.foundDrinks.keys).sorted()
-				self.filteredDrinkNames = self.foundDrinkNames
+				
+				self.filteredDrinkNames = self.allDrinks.keys.filter {
+					$0.contains(searchText)
+				}
+
 				DispatchQueue.main.async {
 					// Reload the table view
 					self.tableView.reloadData()
 					// Hide the activity indicator
 					self.activityIndicator.stopAnimating()
+					
+					print("[DEBUG] Coctails (re)loaded")
 				}
 			} catch {
-				print("Error decoding data: \(error.localizedDescription)")
+				print("[ERROR] decoding data: \(error.localizedDescription)")
 			}
 		}.resume()
 	}
@@ -155,16 +123,18 @@ class CocktailViewController: UIViewController, UITableViewDelegate, UITableView
 		return cell
 	}
 	
-	// MARK: - Table view delegate
-	
-	func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-		let selectedDrinkName = filteredDrinkNames[indexPath.row]
-		if let selectedDrinkIngredients = foundDrinks[selectedDrinkName] {
-			let defaults = UserDefaults.standard
-			defaults.set(selectedDrinkName, forKey: shoppingListKey)
-			defaults.set(selectedDrinkIngredients, forKey: selectedDrinkName)
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		// Get the new view controller using segue.destination.
+		// Pass the selected object to the new view controller.
+		
+		if let destination = segue.destination as? CocktailDetails {
+			if segue.identifier == "segueToCocktail" {
+				if let indexPath = tableView.indexPathForSelectedRow {
+					let selectedItem = filteredDrinkNames[indexPath.row]
+					destination.cocktail = allDrinks[selectedItem]!
+				}
+			}
 		}
-		tableView.deselectRow(at: indexPath, animated: true)
-		navigationController?.popViewController(animated: true)
 	}
+	
 }
