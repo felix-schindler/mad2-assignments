@@ -50,7 +50,7 @@
 		DC9EA42529F94F7400E9A96F = {
 			isa = PBXGroup;
 			children = (
-				DC9EA43029F94F7500E9A96F /* assignment */,
+				DC9EA43029F94F7500E9A96F /* shopping_list */,
 				DC9EA42F29F94F7500E9A96F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -63,7 +63,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		DC9EA43029F94F7500E9A96F /* assignment */ = {
+		DC9EA43029F94F7500E9A96F /* shopping_list */ = {
 			isa = PBXGroup;
 			children = (
 				DC9EA44B29F957CC00E9A96F /* ShoppingList.swift */,
@@ -79,7 +79,7 @@
 				DC9EA43C29F94F7600E9A96F /* LaunchScreen.storyboard */,
 				DC9EA43F29F94F7600E9A96F /* Info.plist */,
 			);
-			path = assignment;
+			path = shopping_list;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
