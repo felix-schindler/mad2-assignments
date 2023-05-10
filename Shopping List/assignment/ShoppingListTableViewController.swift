@@ -50,12 +50,12 @@ class ShoppingListTableViewController: UITableViewController, UISearchBarDelegat
 		
 		if (searchText.isEmpty) {
 			// Search is empty -> reset to all items
-			items = allItems
+			items = allItems.sorted()
 		} else {
 			// Filter for items containing the searchText
 			items = allItems.filter({ (name: String) -> Bool in
 				return name.localizedStandardContains(searchText.lowercased())
-			})
+			}).sorted()
 		}
 
 		// Reload view data
@@ -91,6 +91,20 @@ class ShoppingListTableViewController: UITableViewController, UISearchBarDelegat
 		let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 		cell.textLabel?.text = items[indexPath.row]
 		return cell
+	}
+	
+	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if (editingStyle == .delete) {
+			let item = items[indexPath.row]
+			print("[DEBUG] Deleting '\(item)' in '\(shop)'")
+			ShoppingList.shared.delete(shop: shop, item: item)
+			items = ShoppingList.shared.lists[shop]!
+		}
+		self.tableView.reloadData()
 	}
 	
 	// MARK: - Navigation

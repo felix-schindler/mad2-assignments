@@ -27,11 +27,11 @@ class ShopListViewController: UITableViewController {
 	override func viewDidAppear(_ animated: Bool) {
 		// Load shops from persistence
 		ShoppingList.shared.load()
-
+		
 		// Set items to the keys (list names)
 		items = ShoppingList.shared.lists.keys.sorted()
 		print("[DEBUG] Loaded list names - \(items)")
-
+		
 		// Reload table
 		tableView.reloadData()
 		print("[DEBUG] Reloaded data")
@@ -51,6 +51,20 @@ class ShopListViewController: UITableViewController {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
 		cell.textLabel?.text = items[indexPath.row]
 		return cell
+	}
+	
+	override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+		return true
+	}
+	
+	override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+		if (editingStyle == .delete) {
+			let shop = items[indexPath.row]
+			print("[DEBUG] Deleting '\(shop)'")
+			ShoppingList.shared.deleteShop(shop)
+			items = ShoppingList.shared.lists.keys.sorted()
+		}
+		self.tableView.reloadData()
 	}
 	
 	// MARK: - Navigation

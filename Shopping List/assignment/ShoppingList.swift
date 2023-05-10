@@ -28,6 +28,17 @@ class ShoppingList {
 		print("[DEBUG] Added '\(items)' to list '\(shop)'")
 		persist()
 	}
+	
+	public func delete(shop: String, item: String) {
+		if (lists[shop] == nil) {
+			return
+		}
+		if let index = lists[shop]!.firstIndex(of: item) {
+			lists[shop]!.remove(at: index)
+			print("[DEBUG] Removed '\(item)' from list '\(shop)'")
+			persist()
+		}
+	}
 
 	/// Create a new shopping list
 	public func addShop(_ name: String) -> Void {
@@ -37,6 +48,12 @@ class ShoppingList {
 		
 		lists[name] = []
 		print("[DEBUG] List '\(name)' created - \(lists)")
+		persist()
+	}
+	
+	public func deleteShop(_ name: String) -> Void {
+		lists[name] = nil
+		print("[DEBUG] List '\(name)' deleted - \(lists)")
 		persist()
 	}
 	
