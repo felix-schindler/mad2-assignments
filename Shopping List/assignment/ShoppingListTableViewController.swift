@@ -53,8 +53,8 @@ class ShoppingListTableViewController: UITableViewController, UISearchBarDelegat
 			items = allItems
 		} else {
 			// Filter for items containing the searchText
-			items = allItems.filter({ (names: String) -> Bool in
-				return names.contains(searchText.lowercased())
+			items = allItems.filter({ (name: String) -> Bool in
+				return name.localizedStandardContains(searchText.lowercased())
 			})
 		}
 
