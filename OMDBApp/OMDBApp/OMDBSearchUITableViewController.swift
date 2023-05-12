@@ -7,6 +7,18 @@
 
 import UIKit
 
+struct APIAnswer: Decodable {
+	let Search: [Movie]
+}
+
+struct Movie: Decodable {
+	let Poster: URL
+	let ImdbID: String
+	let Title: String
+	let `Type`: String
+	let Year: String
+}
+
 extension String {
 	var url: String {
 		return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -16,7 +28,8 @@ extension String {
 class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegate {
 	
 	let API_KEY = "92da8288"
-	var items: [String] = []
+	var titles: [String] = []
+	var allMovies: [Movie] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -41,7 +54,7 @@ class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegat
 	}
 	
 	override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-		return items.count
+		return self.titles.count
 	}
 	
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -50,12 +63,12 @@ class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegat
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 		let cell = tableView.dequeueReusableCell(withIdentifier: "reuseIdentifier", for: indexPath)
-		cell.textLabel?.text = items[indexPath.row]
+		cell.textLabel?.text = self.titles[indexPath.row]
 		return cell
 	}
 	
 	private func getSetMovies(_ search: String? = nil) -> Void {
-		let url = "https://www.omdbapi.com?apikey=\(API_KEY)&s=\(search?.url ?? "start")"
+		let url = "https://www.omdbapi.com?apikey=\(API_KEY)&s=\(search?.url ?? "star")"
 		
 		if let url = URL(string: url) {
 			print("GET \(url.absoluteString)")
@@ -64,32 +77,40 @@ class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegat
 					print("[ERROR] \(error.localizedDescription)")
 					return
 				}
-				
+								
 				guard let data = data else {
 					print("[ERROR] No data returned")
 					return
 				}
 				
-				if let json = try? JSONSerialization.jsonObject(with: data, options: []),
-					 let dict = json as? [String: Any],
-					 let searchResults = dict["Search"] as? [[String: Any]] {
+				do {
+					let decoder = JSONDecoder()
+					let result = try decoder.decode(APIAnswer.self, from: data)
+					self.allMovies = result.Search
 					
-					var titles: [String] = []
-					
-					for result in searchResults {
-						if let title = result["Title"] as? String {
-							titles.append(title)
-						}
+					for movie in self.allMovies {
+						self.titles.append(movie.Title)
 					}
-					
-					self.items = titles
 					
 					DispatchQueue.main.async {
 						// Reload the table view
 						self.tableView.reloadData()
 					}
+				} catch {
+					print("[ERROR] Failed to decode JSON")
 				}
 			}.resume()
+		}
+	}
+	
+	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+		if (segue.identifier == "segueToMovie") {
+			if let destination = segue.destination as? MovieViewController {
+				if let indexPath = tableView.indexPathForSelectedRow {
+					let selected = allMovies[indexPath.row]
+					destination.movie = selected
+				}
+			}
 		}
 	}
 }
