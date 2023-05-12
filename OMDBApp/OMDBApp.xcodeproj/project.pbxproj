@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		DC33B40F2A0E858D00711147 /* MovieViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DC33B40E2A0E858D00711147 /* MovieViewController.swift */; };
 		DCA5F4ED2A0A2AE40081D494 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5F4EC2A0A2AE40081D494 /* AppDelegate.swift */; };
 		DCA5F4EF2A0A2AE40081D494 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5F4EE2A0A2AE40081D494 /* SceneDelegate.swift */; };
 		DCA5F4F12A0A2AE40081D494 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5F4F02A0A2AE40081D494 /* ViewController.swift */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		DC33B40E2A0E858D00711147 /* MovieViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieViewController.swift; sourceTree = "<group>"; };
 		DCA5F4E92A0A2AE40081D494 /* OMDBApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OMDBApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		DCA5F4EC2A0A2AE40081D494 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		DCA5F4EE2A0A2AE40081D494 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -64,6 +66,7 @@
 				DCA5F4EE2A0A2AE40081D494 /* SceneDelegate.swift */,
 				DCA5F4F02A0A2AE40081D494 /* ViewController.swift */,
 				DCA5F5032A0A2B660081D494 /* OMDBSearchUITableViewController.swift */,
+				DC33B40E2A0E858D00711147 /* MovieViewController.swift */,
 				DCA5F4F22A0A2AE40081D494 /* Main.storyboard */,
 				DCA5F4F82A0A2AE60081D494 /* Assets.xcassets */,
 				DCA5F4FA2A0A2AE60081D494 /* LaunchScreen.storyboard */,
@@ -149,6 +152,7 @@
 				DCA5F4ED2A0A2AE40081D494 /* AppDelegate.swift in Sources */,
 				DCA5F4EF2A0A2AE40081D494 /* SceneDelegate.swift in Sources */,
 				DCA5F4F72A0A2AE40081D494 /* OMDBApp.xcdatamodeld in Sources */,
+				DC33B40F2A0E858D00711147 /* MovieViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
