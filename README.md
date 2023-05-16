@@ -3,7 +3,7 @@ These are the [assignments](https://gitlab.mi.hdm-stuttgart.de/mad2/mad2-ss23/fs
 | Assignments | Folder                                      |
 |-------------|---------------------------------------------|
 | 1           | [Person Playground](./Person), [First App](./First%20App)      |
-| 2           | TODO: [Number Guess](./Number%20Guess)      |
+| 2           | [Number Guess](./Number%20Guess)      |
 | 3           | TODO: [Constraints](./Constraints)          |
 | 2,3,4       | [Shopping List](./Shopping%20List)          |
 | 5           | [OMDBApp](./OMDBApp)                        |
