@@ -15,9 +15,7 @@ extension String {
 
 class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegate {
 	
-	let API_KEY = "92da8288"
 	var titles: [String] = []
-	var allMovies: [Movie] = []
 	
 	override func viewDidLoad() {
 		super.viewDidLoad()
@@ -32,7 +30,9 @@ class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegat
 		tableView.dataSource = self
 		tableView.delegate = self
 		
-		self.getSetMovies()
+		Task {
+			await self.fetchSetMovies()
+		}
 	}
 	
 	// MARK: - Table view data source
@@ -46,7 +46,9 @@ class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegat
 	}
 	
 	func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-		self.getSetMovies(searchBar.text)
+		Task {
+			await self.fetchSetMovies(searchBar.text)
+		}
 	}
 	
 	override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -55,55 +57,38 @@ class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegat
 		return cell
 	}
 	
-	private func getSetMovies(_ search: String? = nil) -> Void {
-		let url = "https://www.omdbapi.com?apikey=\(API_KEY)&s=\(search?.url ?? "star")"
+	func fetchSetMovies(_ search: String? = nil) async -> Void {
+		var movies: [Movie]
 		
-		if let url = URL(string: url) {
-			print("GET \(url.absoluteString)")
-			URLSession.shared.dataTask(with: url) { data, response, error in
-				if let error = error {
-					print("[ERROR] \(error.localizedDescription)")
-					return
-				}
-				
-				guard let data = data else {
-					print("[ERROR] No data returned")
-					return
-				}
-				
-				do {
-					let decoder = JSONDecoder()
-					let result = try decoder.decode(APIAnswer.self, from: data)
-					self.allMovies = result.Search
-
-					// Access the AppDelegate
-					let appDelegate = UIApplication.shared.delegate as! AppDelegate
-					// Access the NSManagedObjectContext
-					let context = appDelegate.persistentContainer.viewContext
-
-					for movie in self.allMovies {
-						let movieObj = Movie(context: context)
-						try context.save()
-						self.titles.append(movie.title)
-					}
-										
-					DispatchQueue.main.async {
-						// Reload the table view
-						self.tableView.reloadData()
-					}
-				} catch {
-					print("[ERROR] Failed to decode JSON")
-				}
-			}.resume()
+		// Load from DB
+		movies = MovieModel.listFromDB(search)
+		
+		// If no movies are found
+		if (movies.isEmpty) {
+			print("[DEBUG] No movies in DB match the search, attempting to load from Web")
+			// Load from Web
+			movies = await MovieModel.listFromWeb(search)
 		}
+		
+		self.titles = []
+		if (movies.isEmpty) {
+			self.titles.append("No movies found")
+		} else {
+			movies.forEach { movie in
+				self.titles.append(movie.title!)
+			}
+		}
+		
+		// Reload the table view
+		self.tableView.reloadData()
 	}
 	
 	override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 		if (segue.identifier == "segueToMovie") {
 			if let destination = segue.destination as? MovieViewController {
 				if let indexPath = tableView.indexPathForSelectedRow {
-					let selected = allMovies[indexPath.row]
-					destination.movie = selected
+					let selected = titles[indexPath.row]
+					destination.title = selected
 				}
 			}
 		}

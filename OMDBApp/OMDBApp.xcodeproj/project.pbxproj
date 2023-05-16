@@ -16,6 +16,8 @@
 		DCA5F4F92A0A2AE60081D494 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DCA5F4F82A0A2AE60081D494 /* Assets.xcassets */; };
 		DCA5F4FC2A0A2AE60081D494 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DCA5F4FA2A0A2AE60081D494 /* LaunchScreen.storyboard */; };
 		DCA5F5042A0A2B660081D494 /* OMDBSearchUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCA5F5032A0A2B660081D494 /* OMDBSearchUITableViewController.swift */; };
+		DCE593822A1375660045CBEE /* PersistenceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE593812A1375660045CBEE /* PersistenceManager.swift */; };
+		DCE593842A137FA60045CBEE /* MovieModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DCE593832A137FA60045CBEE /* MovieModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		DCA5F4FB2A0A2AE60081D494 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DCA5F4FD2A0A2AE60081D494 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DCA5F5032A0A2B660081D494 /* OMDBSearchUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OMDBSearchUITableViewController.swift; sourceTree = "<group>"; };
+		DCE593812A1375660045CBEE /* PersistenceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersistenceManager.swift; sourceTree = "<group>"; };
+		DCE593832A137FA60045CBEE /* MovieModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +66,7 @@
 		DCA5F4EB2A0A2AE40081D494 /* OMDBApp */ = {
 			isa = PBXGroup;
 			children = (
+				DCE593852A137FBA0045CBEE /* data */,
 				DCA5F4EC2A0A2AE40081D494 /* AppDelegate.swift */,
 				DCA5F4EE2A0A2AE40081D494 /* SceneDelegate.swift */,
 				DCA5F4F02A0A2AE40081D494 /* ViewController.swift */,
@@ -74,6 +79,15 @@
 				DCA5F4F52A0A2AE40081D494 /* OMDBApp.xcdatamodeld */,
 			);
 			path = OMDBApp;
+			sourceTree = "<group>";
+		};
+		DCE593852A137FBA0045CBEE /* data */ = {
+			isa = PBXGroup;
+			children = (
+				DCE593812A1375660045CBEE /* PersistenceManager.swift */,
+				DCE593832A137FA60045CBEE /* MovieModel.swift */,
+			);
+			path = data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -148,8 +162,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DCA5F4F12A0A2AE40081D494 /* ViewController.swift in Sources */,
+				DCE593822A1375660045CBEE /* PersistenceManager.swift in Sources */,
 				DCA5F5042A0A2B660081D494 /* OMDBSearchUITableViewController.swift in Sources */,
 				DCA5F4ED2A0A2AE40081D494 /* AppDelegate.swift in Sources */,
+				DCE593842A137FA60045CBEE /* MovieModel.swift in Sources */,
 				DCA5F4EF2A0A2AE40081D494 /* SceneDelegate.swift in Sources */,
 				DCA5F4F72A0A2AE40081D494 /* OMDBApp.xcdatamodeld in Sources */,
 				DC33B40F2A0E858D00711147 /* MovieViewController.swift in Sources */,
