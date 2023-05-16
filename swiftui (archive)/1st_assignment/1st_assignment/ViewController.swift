@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+	
+	var count = 0
 
 	@IBOutlet weak var button: UIButton!
 	@IBOutlet weak var label: UILabel!
@@ -18,6 +20,7 @@ class ViewController: UIViewController {
 	}
 
 	@IBAction func onButtonPressed(_ sender: Any) {
-		label.text = "SwiftUI is just better."
+		count += 1
+		label.text = "SwiftUI is just better. \(count)"
 	}
 }
