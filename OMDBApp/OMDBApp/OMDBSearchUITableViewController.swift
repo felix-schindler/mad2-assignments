@@ -7,18 +7,6 @@
 
 import UIKit
 
-struct APIAnswer: Decodable {
-	let Search: [Movie]
-}
-
-struct Movie: Decodable {
-	let Poster: URL
-	let ImdbID: String
-	let Title: String
-	let `Type`: String
-	let Year: String
-}
-
 extension String {
 	var url: String {
 		return self.addingPercentEncoding(withAllowedCharacters: .urlQueryAllowed)!
@@ -77,7 +65,7 @@ class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegat
 					print("[ERROR] \(error.localizedDescription)")
 					return
 				}
-								
+				
 				guard let data = data else {
 					print("[ERROR] No data returned")
 					return
@@ -87,11 +75,18 @@ class OMDBSearchUITableViewController: UITableViewController, UISearchBarDelegat
 					let decoder = JSONDecoder()
 					let result = try decoder.decode(APIAnswer.self, from: data)
 					self.allMovies = result.Search
-					
+
+					// Access the AppDelegate
+					let appDelegate = UIApplication.shared.delegate as! AppDelegate
+					// Access the NSManagedObjectContext
+					let context = appDelegate.persistentContainer.viewContext
+
 					for movie in self.allMovies {
-						self.titles.append(movie.Title)
+						let movieObj = Movie(context: context)
+						try context.save()
+						self.titles.append(movie.title)
 					}
-					
+										
 					DispatchQueue.main.async {
 						// Reload the table view
 						self.tableView.reloadData()

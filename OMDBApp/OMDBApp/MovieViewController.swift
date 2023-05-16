@@ -18,10 +18,10 @@ class MovieViewController: UIViewController {
 	override func viewDidLoad() {
 		super.viewDidLoad()
 
-		self.title = movie?.Title ?? "Movie"
-		titleLabel.text = movie?.Title
-		titleLabel.text = movie?.Year
-		titleLabel.text = movie?.ImdbID
+		self.title = movie?.title ?? "Movie"
+		titleLabel.text = movie?.title
+		titleLabel.text = movie?.year
+		titleLabel.text = movie?.imdbID
 
 		// Do any additional setup after loading the view.
 	}
